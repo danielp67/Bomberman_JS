@@ -1,0 +1,58 @@
+
+/*-------------------------------*/
+/*------------RESET--------------*/
+/*-------------------------------*/
+html, body{
+    margin: 0px;
+    font-size: 100%;
+    font-family: 'Verdana';
+    height: 100%;
+   
+}
+
+
+*, *::before,*::after{
+    box-sizing: border-box;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+/*------------Plateau--------------*/
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.plateau_jeu{
+
+    height: 500px;
+    width: 500px;
+    background-color: darkgrey;
+    border :20px rgba(58, 58, 58, 0.6);
+    position: relative;
+}
+
+
+.joueur{
+    height:50px;
+    width: 50px;
+    background-color: rgb(236, 233, 27);
+    position:absolute;
+    top:200px;
+    left:200px;
+}
+
+
+.ennemi{
+    height:50px;
+    width: 50px;
+    background-color: rgb(27, 100, 236);
+    position:absolute;
+    top:0px;
+    left:0px;
+}
