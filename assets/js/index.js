@@ -29,6 +29,7 @@ window.addEventListener("keydown", function(event) {
 		
 		case 'Space':	
 			bombCreation(x,y);
+			bombNb.push();
 			break;
 		
 		case 'ArrowLeft':
@@ -71,28 +72,23 @@ let bombD=[];
 let date;
 
 
+console.log(bombNb.length);
 
 function bombCreation(x,y){
-	let c=bombNb.length;
-	bombNb[c]=document.createElement("div");
-	bombNb[c].classList.add("bomb");
-	console.log(c);
-	console.log(date);
-	gameboard.appendChild(bombNb[c]);
-	bombNb=document.querySelectorAll(".bomb");
+	let i=bombNb.length;
+	bombNb[i]=document.createElement("div");
+	bombNb[i].classList.add("bomb");
 	
-	for(let i=0; i<bombNb.length;i++){
-		if(i==bombNb.length-1){
-			bombX[i]=x;
-			bombY[i]=y;
-			bombD[i]=Math.floor(Date.now() / 1000)+3;
-			console.log(bombD[i]);
-			bombNb[i].style.left= String(x)+'px';
-			bombNb[i].style.top= String(y)+'px';
-			
-		}
+	gameboard.appendChild(bombNb[i]);
+	bombNb[i].style.left= String(x)+'px';
+	bombNb[i].style.top= String(y)+'px';
+	
+	
+	bombX[i]=x;
+	bombY[i]=y;
+	bombD[i]=Math.floor((Date.now()+2000) / 100);
+	
 
-	}
 }
 
 /*
@@ -112,21 +108,29 @@ function bombDisplay(){
 */
 
 function bombExploded(){
-	
-	/*
-	if(bombNb.length){
-			for(let i=0; i<bombNb.length;i++){
-				
-						if(date>=bombD[i]){
-						gameboard.removeChild(bombNb[i]);
+	date= Math.floor(Date.now() / 100);
+console.log(bombD);
+		for(let i=0;i<bombD.length;i++){
+				if(date>bombD[i]){
+						gameboard.removeChild(bombNb[i]);	
+						bombX.splice(i,1);
+						bombY.splice(i,1);
+						bombD.splice(i,1);
+						bombNb.splice(i,1);
+						console.log(bombNb);
+				}
 						
-
-						}
+		}
 		
-			}
-	}	
-	*/
+			
 }
+		
+		
+		
+				
+
+	
+
 
 
 
@@ -250,7 +254,7 @@ function displayPosition(number){
 
 
 
-		// Appel de la mise à jour pour chaque ennemis
+		// Fonction de mise à jour de l'écran ennemis et bombes
 
 	function updateTime(){
 		
@@ -262,7 +266,7 @@ function displayPosition(number){
 		
 		checkPosition();
 		bombExploded();
-		date= Math.floor(Date.now() / 1000)
+		
 	}
 
 
