@@ -1,9 +1,24 @@
 
+// Taille du jeu
 
-// Déplacement du joueur
+const sizeGameboard =500;
+const sizeCell=50;
+const nbEnemy=5;
+
+
+
 const player = document.querySelector(".player");
 const gameboard = document.querySelector(".gameboard");
 
+player.style.height=sizeCell+'px';
+player.style.width=sizeCell+'px';
+
+
+gameboard.style.height=sizeGameboard+'px';
+gameboard.style.width=sizeGameboard+'px';
+
+
+// Déplacement du joueur
 
 window.addEventListener("keydown", function(event) {
 	let touch=event.code;
@@ -13,105 +28,289 @@ window.addEventListener("keydown", function(event) {
 	switch (touch) {
 		
 		case 'Space':	
-			alert("espace");
+			bombCreation(x,y);
 			break;
 		
 		case 'ArrowLeft':
-			x-=50;		
+			x-=sizeCell;		
 			break;
 		
 		case 'ArrowDown':
-			y+=50;
+			y+=sizeCell;
 			break;
 		
 		case 'ArrowRight':
-			x+=50;
+			x+=sizeCell;
 			break;
 		
 		case 'ArrowUp':
-			y-=50;
+			y-=sizeCell;
 			break;
 		
 		default:
 
 	}
-if(x>=0 && x<500){
+if(x>=0 && x<sizeGameboard){
 	player.style.left= String(x)+'px';
 }
 
-if(y>=0 && y<500){
+if(y>=0 && y<sizeGameboard){
 	player.style.top= String(y)+'px';
 
 }
 
 });
 
+// Création des bombes
 
-//Création des ennemis
+let bomb;
+let bombNb=[];
+let bombX=[];
+let bombY=[];
+let bombD=[];
+let date;
 
-let nbEnemy=5;
 
 
-for(let i=0; i<nbEnemy; i++){
-	let x=Math.floor(Math.random()*10)*50;
-	let y=Math.floor(Math.random()*10)*50;
-	let enemy=document.createElement("div");
-	enemy.classList.add("enemy");
-	gameboard.appendChild(enemy);
-	enemy.style.left= String(x)+'px';
-	enemy.style.top= String(y)+'px'
+function bombCreation(x,y){
+	let c=bombNb.length;
+	bombNb[c]=document.createElement("div");
+	bombNb[c].classList.add("bomb");
+	console.log(c);
+	console.log(date);
+	gameboard.appendChild(bombNb[c]);
+	bombNb=document.querySelectorAll(".bomb");
+	
+	for(let i=0; i<bombNb.length;i++){
+		if(i==bombNb.length-1){
+			bombX[i]=x;
+			bombY[i]=y;
+			bombD[i]=Math.floor(Date.now() / 1000)+3;
+			console.log(bombD[i]);
+			bombNb[i].style.left= String(x)+'px';
+			bombNb[i].style.top= String(y)+'px';
+			
+		}
+
+	}
+}
+
+/*
+function bombDisplay(){
+	for(let i=0; i<bombNb.length;i++){
+		let x=bombX[i];
+		let y=bombY[i];
+
+		bombNb[i].style.left= String(x)+'px';
+
+		bombNb[i].style.top= String(y)+'px';
+		let bombDuration=setTimeout(checkDestroy,2500,x,y);
+
+	}
+
+}
+*/
+
+function bombExploded(){
+	
+	/*
+	if(bombNb.length){
+			for(let i=0; i<bombNb.length;i++){
+				
+						if(date>=bombD[i]){
+						gameboard.removeChild(bombNb[i]);
+						
+
+						}
+		
+			}
+	}	
+	*/
 }
 
 
 
 
 
-	//Déplacement des ennemis
 
-function updatePosition(){
-	let enemys=gameboard.querySelectorAll(".enemy");
+// Création des ennemis
 
-	for(let i=0; i<enemys.length; i++){
-		let x = enemys[i].offsetLeft;
-		let y = enemys[i].offsetTop;
+let enemyX=[];
+let enemyY=[];
+let enemyNb;
+
+function enemyCreation(){
+	for(let i=0; i<nbEnemy; i++){
+		enemyX[i]=Math.floor(Math.random()*10)*sizeCell;
+		enemyY[i]=Math.floor(Math.random()*10)*sizeCell;
+		let enemy=document.createElement("div");
+		enemy.classList.add("enemy");
+		gameboard.appendChild(enemy);
+	}
+	
+	enemyNb=document.querySelectorAll(".enemy");
+	checkPosition();
+}
+
+enemyCreation();
+
+
+
+	// Déplacement des ennemis chaque intervalle de temps
+
+	// Mise à jour des coordonnées
+
+function updatePosition(i){
+		let x = enemyX[i];
+		let y = enemyY[i];
 		let position=Math.floor(Math.random()*4);
 
 		switch (position) {
 
 			case 0:
-				x-=50;		
+				x-=sizeCell;		
 				break;
 			
 			case 1:
-				y-=50;
+				x+=sizeCell;
 				break;
 			
 			case 2:
-				x+=50;
+				y-=sizeCell;
 				break;
 			
 			case 3:
-				y+=50;
+				y+=sizeCell;
 				break;
 			
 			default:
 	
 		}
-	if(x>=0 && x<500){
-		enemys[i].style.left= String(x)+'px';
+		if(x>=0 && x<sizeGameboard){
+			enemyX[i]=x;
+			
+		}else {updatePosition(i);
+		}
+
+		if(y>=0 && y<sizeGameboard){
+			enemyY[i]=y;;
+		
+		}else {updatePosition(i);		
+		}
 	}
+
+
+		// Vérification des positions entre ennemis
+function checkPosition(){
 	
-	if(y>=0 && y<500){
-		enemys[i].style.top= String(y)+'px';
+	for(let i=0; i<enemyNb.length; i++){
+
+		for(let n=i+1; n<enemyNb.length;n++){
+			
+			if(enemyX[i]==enemyX[n]){
+
+				if(enemyY[i]==enemyY[n]){
+						updatePosition(n);
+						displayPosition(i);
+				}
+				
+				else {
+					displayPosition(i);
+					
+				}
+			}
+			else {
+				
+				displayPosition(i);
+				
+			}
+			displayPosition(n);
+		}
+		
+
 	
-	}		
 	}
+	 
+}
+
+
+
+		// Affichage des ennemis à l'écran
+
+function displayPosition(number){
+	let x=enemyX[number];
+	let y=enemyY[number];
+
+		enemyNb[number].style.left= String(x)+'px';
+
+		enemyNb[number].style.top= String(y)+'px';
+
+}	
+
+
+
+
+		// Appel de la mise à jour pour chaque ennemis
+
+	function updateTime(){
+		
+		for(let i=0; i<enemyNb.length; i++){
+			
+			updatePosition(i);
+			
+		}
+		
+		checkPosition();
+		bombExploded();
+		date= Math.floor(Date.now() / 1000)
+	}
+
+
+		// Interval de mise à jour
+
+	let interval=setInterval(updateTime,1000);
+
+
+	
+
+// Vérification des collisions avec le joueur
+
+
+
+
+// Ennemis dead
+
+function checkDestroy(x,y){
+
+	let bombX=x;
+	let bombY=y;
+
+	let explodeXmin=bombX-50;
+	let explodeXmax=bombX+100;
+	let explodeYmin=bombY-50;
+	let explodeYmax=bombY+100;
+
+
+	for(let i=0; i<enemyNb.length; i++){
+
+				if(enemyX[i]>=explodeXmin && enemyX[i]<explodeXmax && enemyY[i]>=explodeYmin && enemyY[i]<explodeYmax){
+
+					alert("toucher");
+				}
+				
+				
+			}
 
 }
 
 
-	let interval=setInterval(updatePosition,1000); 
+function enemyDestroy(number){
+	
+
+		gameboard.removeChild(enemyNb[i]);
 
 
+}
 
 
+// Joueur dead
