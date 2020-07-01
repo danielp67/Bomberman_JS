@@ -1,4 +1,6 @@
 
+
+
 // Taille du jeu
 
 const sizeGameboard =500;
@@ -10,9 +12,9 @@ let lifeCount=5;
 
 const player = document.querySelector(".player");
 const gameboard = document.querySelector(".gameboard");
-const menu = document.querySelector(".menu");
+const audio = document.querySelector(".audio");
 let life= document.getElementById("life");
-life.innerHTML = lifeCount + " vie restantes";
+life.innerHTML = lifeCount + "  vies  restantes";
 
 
 
@@ -59,12 +61,15 @@ window.addEventListener("keydown", function(event) {
 	}
 if(x>=0 && x<sizeGameboard){
 	player.style.left= String(x)+'px';
+	walkSong();
 }
+else{wallSong();}
 
 if(y>=0 && y<sizeGameboard){
-	player.style.top= String(y)+'px';
+	player.style.top= String(y)+'px';	
+	
+}else{wallSong();}
 
-}
 	playerLife();
 });
 
@@ -103,6 +108,7 @@ function bombExploded(){
 	let date= Math.floor(Date.now() / 100);
 		
 	for(let i=0;i<bombD.length;i++){
+		
 				if(date>bombD[i]){
 						gameboard.removeChild(bombNb[i]);	
 						bombX.splice(i,1);
@@ -256,6 +262,7 @@ function checkDestroy(){
 	for(let i=0;i<bombD.length;i++){
 		console.log(bombD.length);
 		if(date>=bombD[i]+2 && date>=(bombD[i]-8)){
+			bombSong();
 			let explodeXmin=bombX[i]-sizeCell-1;
 			let explodeXmax=bombX[i]+2*sizeCell-1;
 			let explodeYmin=bombY[i]-sizeCell-1;
@@ -292,6 +299,7 @@ function enemyDestroy(number){
 		enemyY.splice(i,1);
 		enemyX.splice(i,1);
 		console.log(enemyNb);
+		enemyDeathSong();
 																
 }
 
@@ -333,6 +341,7 @@ function playerLife(){
 	for(let i=0; i<enemyNb.length;i++){
 		if(x==enemyX[i] && y==enemyY[i]){
 			playerDead();
+			
 		}
 		
 	}
@@ -344,14 +353,19 @@ function playerLife(){
 // Joueur dead
 function playerDead(){
 	lifeCount--;
+	
 	if(lifeCount == 0) {
-		life.innerHTML = "GAME OVER!";
-		
+		life.innerHTML = "GAME OVER!!!";
+		overSong();
 		startMenu();
 	}
-	
+	else if (lifeCount == 1){
+		life.innerHTML = lifeCount + "  vie  restante";
+		lifeSong();
+	}
     else {	
-        life.innerHTML = lifeCount + " vie restantes";
+		life.innerHTML = lifeCount + "  vies  restantes";
+		lifeSong();
     }	
 
 }
@@ -361,4 +375,113 @@ function playerDead(){
 
 function startMenu(){
 		
+}
+
+
+
+// Theme song
+/*
+let theme_song=document.createElement('audio');
+ let first=true;
+      window.addEventListener('mousedown',onmousedown);
+ 
+    function onmousedown(){
+       if(!first) return;
+       first=false;
+	   theme_song.src="lib/theme.ogg";
+	   theme_song.setAttribute("loop","true");
+	   theme_song.volume=0.2;
+       theme_song.play();
+	}
+
+*/
+
+let songOver = document.createElement('audio');
+let songWin = document.createElement('audio');
+
+let player_song = document.createElement('audio');
+let wall_song = document.createElement('audio');
+
+let songLife = document.createElement('audio');
+let songEnemy = document.createElement('audio');
+
+let walk_song = document.createElement('audio');
+let songBomb = document.createElement('audio');
+
+audio.appendChild(walk_song);
+audio.appendChild(wall_song);
+audio.appendChild(songOver);
+
+
+
+	
+	songOver.volume=0.5;
+	songWin.volume=0.5;
+
+	player_song.volume=0.5;
+	wall_song.volume=0.2;
+
+	songLife.volume=0.5;
+	songEnemy.volume=0.5;
+
+	walk_song.volume=0.05;
+	songBomb.volume=0.5;
+
+
+	
+function walkSong(){
+	walk_song.src="lib/walk.ogg";
+	walk_song.play();
+}
+
+function wallSong(){
+	wall_song.src="lib/wall.ogg";
+	wall_song.play();
+}
+
+
+
+function overSong(){
+	songOver.src="lib/gameover.mp3";
+	songOver.play();
+	
+}
+
+
+function lifeSong(){
+	songLife.src="lib/lifelose.mp3";
+	songLife.play();
+	
+}
+
+
+function winSong(){
+	songWin.scr="lib/wingame.mp3";
+	songWin.play();	
+}
+
+
+
+function playerDeathSong(){
+	
+	player_song.src="lib/playerdeath.mp3";
+	player_song.play();
+	
+}
+
+
+function enemyDeathSong(){
+	
+	songEnemy.src="lib/enemydeath.mp3";
+	songEnemy.play();
+	
+
+}
+
+
+function bombSong(){
+	
+	songBomb.src="lib/bomb_explosion.wav";
+	songBomb.play();
+
 }
