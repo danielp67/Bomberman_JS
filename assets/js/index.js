@@ -1,11 +1,33 @@
 
+let startBtn = document.getElementById("start");
+let quitBtn = document.getElementById("quit");
+let menuBtn = document.getElementById("menu");
+
+startBtn.addEventListener("click",startMenu);
+
+const mainMenu = document.querySelector("#nav_menu");
+const homePage = document.querySelector("#homepage");
+
+
+menuBtn.addEventListener("click", function() {
+	
+	mainMenu.classList.toggle("active");
+
+});
+
+startBtn.addEventListener("click", function() {
+	
+	homePage.classList.toggle("active");
+
+});
 
 
 // Taille du jeu
 
+
 const sizeGameboard =500;
 const sizeCell=50;
-const nbEnemy=5;
+let nbEnemy=1;
 let lifeCount=5;
 
 
@@ -13,20 +35,25 @@ let lifeCount=5;
 const player = document.querySelector(".player");
 const gameboard = document.querySelector(".gameboard");
 const audio = document.querySelector(".audio");
+
+
+
 let life= document.getElementById("life");
+let enemydisplay= document.getElementById("enemy");
 life.innerHTML = lifeCount + "  vies  restantes";
-
-
+enemydisplay.innerHTML = "Enemies : "+ nbEnemy;;
 
 player.style.height=sizeCell+'px';
 player.style.width=sizeCell+'px';
-
-
 gameboard.style.height=sizeGameboard+'px';
 gameboard.style.width=sizeGameboard+'px';
 
 
+
+
 // Déplacement du joueur
+
+
 
 window.addEventListener("keydown", function(event) {
 	let touch=event.code;
@@ -73,7 +100,12 @@ if(y>=0 && y<sizeGameboard){
 	playerLife();
 });
 
+
+
+
+
 // Création des bombes
+
 
 let bomb;
 let bombNb=[];
@@ -81,9 +113,6 @@ let bombX=[];
 let bombY=[];
 let bombD=[];
 
-
-
-console.log(bombNb.length);
 
 function bombCreation(x,y){
 	let i=bombNb.length;
@@ -300,6 +329,7 @@ function enemyDestroy(number){
 		enemyX.splice(i,1);
 		console.log(enemyNb);
 		enemyDeathSong();
+		enemyDead();
 																
 }
 
@@ -327,7 +357,11 @@ function enemyDestroy(number){
 
 		// Interval de mise à jour
 
-	let interval=setInterval(updateTime,1000);
+		let interval=setInterval(updateTime,1000);
+		
+	
+
+		
 
 
 	
@@ -357,7 +391,7 @@ function playerDead(){
 	if(lifeCount == 0) {
 		life.innerHTML = "GAME OVER!!!";
 		overSong();
-		startMenu();
+		
 	}
 	else if (lifeCount == 1){
 		life.innerHTML = lifeCount + "  vie  restante";
@@ -371,10 +405,27 @@ function playerDead(){
 }
 
 
+// Enemeis restants
+
+function enemyDead(){
+	nbEnemy--;
+	
+	if(nbEnemy == 0) {
+		enemydisplay.innerHTML = "YOU WIN!!!";
+		winSong();
+		startMenu();
+	}
+    else {	
+		enemydisplay.innerHTML = "Enemies : "+ nbEnemy;
+		
+    }	
+
+}
 
 
 function startMenu(){
-		
+	
+	
 }
 
 
@@ -399,31 +450,24 @@ let theme_song=document.createElement('audio');
 let songOver = document.createElement('audio');
 let songWin = document.createElement('audio');
 
-let player_song = document.createElement('audio');
+
 let wall_song = document.createElement('audio');
-
 let songLife = document.createElement('audio');
-let songEnemy = document.createElement('audio');
 
+let songEnemy = document.createElement('audio');
 let walk_song = document.createElement('audio');
 let songBomb = document.createElement('audio');
 
-audio.appendChild(walk_song);
-audio.appendChild(wall_song);
-audio.appendChild(songOver);
 
 
-
-	
 	songOver.volume=0.5;
 	songWin.volume=0.5;
 
-	player_song.volume=0.5;
+	
 	wall_song.volume=0.2;
-
 	songLife.volume=0.5;
-	songEnemy.volume=0.5;
 
+	songEnemy.volume=0.5;
 	walk_song.volume=0.05;
 	songBomb.volume=0.5;
 
@@ -456,18 +500,11 @@ function lifeSong(){
 
 
 function winSong(){
-	songWin.scr="lib/wingame.mp3";
-	songWin.play();	
+	songWin.src="lib/wingame.mp3";
+	songWin.play();
+	console.log("win");
 }
 
-
-
-function playerDeathSong(){
-	
-	player_song.src="lib/playerdeath.mp3";
-	player_song.play();
-	
-}
 
 
 function enemyDeathSong(){
