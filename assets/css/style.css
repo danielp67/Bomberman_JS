@@ -53,26 +53,32 @@ footer{
     justify-content: space-evenly;
     padding-left: 10%;
     padding-right: 10%;
-    
+    z-index: 100;
 }
 
 
 
 #nav_menu {
-    position:fixed; 
-    z-index:10; 
-    right:-30%; 
-    top:40px; 
+    position:fixed;
+    z-index:10;
+    right:-30%;
+    top:40px;
     background-color: rgb(255, 196, 0);
+    border-radius: 30px;
+    border : 10px ridge red;
     width:30%;
-    font-size: 4rem;
+    font-size: 2rem;
     height: 80%;
     list-style-type: none;
-    text-align:center; 
+    text-align:center;
     padding-inline-start: 0px;
     display: flex;
     flex-direction: column;
     align-content: space-around;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
 }
 
     #nav_menu{
@@ -105,17 +111,43 @@ footer{
         to {right:10%;}
     }
 
+fieldset{
+    border:none;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
 
+    justify-content: space-between;
+    align-items :center;
+}
+
+
+#setting{
+    width:250px;
+    height:80px;
+    background-color: rgb(255, 0, 0);
+    font-size: 2.5rem;
+    font-family: 'Arcade';
+    color:white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    position: relative;   
+    margin: auto;
+}
 
     #homepage {
         position:fixed; 
         z-index:5; 
-        top:-80%; 
+        top:-100%; 
         left:0px; 
         background-color: darkgrey;
         width:100%;
-        font-size: 4rem;
-        height: 80%;
+        padding-top: 10rem;
+        font-size: 8rem;
+        height: 100%;
         list-style-type: none;
         text-align:center; 
         padding-inline-start: 0px;
@@ -138,19 +170,19 @@ footer{
         /* Animations pour le menu slide */
         @keyframes slideDown {
             from {top:0%;}
-            to {top:-80%;}
+            to {top:-100%;}
         }
         @-webkit-keyframes slideDown {
             from {top:0%;}
-            to {top:-80%;}
+            to {top:-100%;}
         }
     
         @keyframes slideUp {
-            from {top:-80%;}
+            from {top:-100%;}
             to {top:0%;}
         }
         @-webkit-keyframes slideUp {
-            from {top:-80%;}
+            from {top:-100%;}
             to {top:0%;}
         }
 
@@ -209,10 +241,30 @@ main{
 }
 
 
+#score{
+    position:fixed;
+    right:5%;
+    top:150px;
+    width: 200px;
+    font-size:1.8rem;
+    font-weight: 10;
+}
+
+
+#timer{
+    position:fixed;
+    right:5%;
+    top:300px;
+    width: 150px;
+    font-size:1.8rem;
+    font-weight: 10;
+}
+
+
 .gameboard{
 
-    height: 500px;
-    width: 500px;
+    height: 700px;
+    width: 700px;
     background-color: rgb(66, 211, 86);
     border :20px rgba(58, 58, 58, 0.6);
     position: relative;
@@ -221,15 +273,18 @@ main{
 
 
 .player{
-    height:50px;
-    width: 50px;
+    height:20px;
+    width: 20px;
     background-size: cover;
     position:absolute;
     top:200px;
     left:200px;
+    border-radius: 50%;
     background-color: rgb(236, 222, 27);
-    
-     
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 
 .walkdown{
@@ -249,7 +304,7 @@ main{
 }
 
 
-walkright{
+.walkright{
     
     animation-name: walkright;
     animation-duration: 1.5s;
@@ -258,10 +313,45 @@ walkright{
 
 }
  
-@keyframes walkdown {
+@keyframes walkright {
     0%   { background: url("../img/player4.png") no-repeat center ;}
     50%  { background: url("../img/player5.png") no-repeat center ;}
     100%  { background: url("../img/player6.png") no-repeat center ;}
+    
+}
+
+
+
+.walkup{
+    
+    animation-name: walkup;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+}
+ 
+@keyframes walkup {
+    0%   { background: url("../img/player7.png") no-repeat center ;}
+    50%  { background: url("../img/player8.png") no-repeat center ;}
+    100%  { background: url("../img/player9.png") no-repeat center ;}
+    
+}
+
+
+.walkleft{
+    
+    animation-name: walkleft;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+}
+ 
+@keyframes walkleft {
+    0%   { background: url("../img/player10.png") no-repeat center ;}
+    50%  { background: url("../img/player11.png") no-repeat center ;}
+    100%  { background: url("../img/player12.png") no-repeat center ;}
     
 }
 

@@ -16,9 +16,35 @@
         <!--Barre de navigation fixe en haut-->
         <header >
             <h1>Bomberman</h1>
-           <div id="homepage"></div>
-            <nav id="nav_menu">    
+           <div id="homepage">Bomberman<br><br>Click to play !</div>
+            <nav id="nav_menu">  
                    
+                <form method="get" action="">
+                    <fieldset>
+                        <legend>Options</legend>
+
+                        <p>Level<br>
+                        <input type="radio" name="levelset" value="easy" id="easy" checked/><label for="easy">easy</label>
+                        <input type="radio" name="levelset" value="medium" id="medium" /><label for="medium">medium</label>
+                        <input type="radio" name="levelset" value="hard" id="hard" /><label for="hard">hard</label>
+                        </p>
+
+                        <p>Timer<br>
+                        <input type="radio" name="timerset" value="yes" id="timersetyes" checked/><label for="easy">Yes</label>
+                        <input type="radio" name="timerset" value="no" id="timersetno" /><label for="medium">No</label>
+                        
+
+                        <p>Life<br>
+                        <input type="radio" name="lifeset" value="yes" id="lifesetyes" checked/><label for="easy">Yes</label>
+                        <input type="radio" name="lifeset" value="no" id="lifesetno" /><label for="medium">Infinity</label>
+                        </p>
+                        <input type="submit" value="SET" id="setting" />
+                   </fieldset>
+                
+                </form>
+
+
+
             </nav>
 
             
@@ -32,13 +58,11 @@
             <p id="enemy"></p>
 
                 <div class="gameboard">
-
                     <div class="player">
                     </div>
-
-
                 </div>
-            
+            <p id="score"></p>
+            <p id="timer"></p>
        
         </main>
 
