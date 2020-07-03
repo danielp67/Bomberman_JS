@@ -20,6 +20,7 @@ quitBtn.addEventListener("click", stopGame);
 
 menuBtn.addEventListener("click", function () {
 	if(boolmenu){
+	mainMenu.classList.remove("right");
 	mainMenu.classList.add("active");
 }
 });
@@ -28,6 +29,7 @@ menuBtn.addEventListener("click", function () {
 settingBtn.addEventListener("click", function (event) {
 	event.preventDefault();
 	mainMenu.classList.remove("active");
+	mainMenu.classList.add("inactive");
 	settingGame();
 });
 
@@ -37,6 +39,7 @@ function textGame() {
 	scoreFinal();
 	homePage.innerHTML = homePageText +"<br>" + homePageScore;
 	homePage.classList.remove("active");
+	homePage.classList.add("inactive");
 }
 
 
@@ -44,6 +47,7 @@ function textGame() {
 let boolstop=true;
 let boolstart=true;
 let boolmenu=true;
+let boolplayer=false;
 
 function stopGame() {
 	if(boolstop){
@@ -57,20 +61,21 @@ function stopGame() {
 function setupInitialization() {
 	boolstop=true;
 	boolstart=true;
-	console.log("refresh2");
 	setTimeout(location.reload(true), 1000);
 }
 
 function startGame() {
 	
 	if(boolstart){
-		settingGame();	
+		settingGame();
+		homePage.classList.remove("down");
 		homePage.classList.add("active");
 		enemyCreation();
-		interval = setInterval(updateTime, 1000);
+		interval = setInterval(updateTime, speed);
 		startTimer();	
 		boolstart=false;
 		boolmenu=false;
+		boolplayer=true;
 	}
 }
 
@@ -84,21 +89,24 @@ let lifeset;
 
 
 function settingGame(){
-	console.log("test");
+
 	if (document.getElementById('easy').checked) {
 		sizeCell=50;
 		sizeGameboard=500;
 		nbEnemy=5;
+		speed=1000;
 	   }
 	 if (document.getElementById('medium').checked) {
 		sizeCell=50;
 		sizeGameboard=600;
 		nbEnemy=10;
+		speed=1000;
 	   }
 	if (document.getElementById('hard').checked) {
 		sizeCell=20;
 		sizeGameboard=700;
 		nbEnemy=20;
+		speed=500;
 		
 	   }
 	   player.classList.add("walkdown");
@@ -106,6 +114,7 @@ function settingGame(){
 	   player.style.width = sizeCell + 'px';
 	   gameboard.style.height = sizeGameboard + 'px';
 	   gameboard.style.width = sizeGameboard + 'px';
+	   enemydisplay.innerHTML = "Enemies : " + nbEnemy;
 
 	   if (document.getElementById('timersetyes').checked) {
 		timerset=true;
@@ -117,10 +126,12 @@ function settingGame(){
 
 	   if (document.getElementById('lifesetyes').checked) {
 		lifeset =true;
+		lifedisplay.innerHTML = lifeCount + "  vies  restantes";
 	   }
 
 	   if (document.getElementById('lifesetno').checked) {
 		lifeset =false;
+		lifedisplay.innerHTML = "You are invincible !"
 	   }
 	   
 		  
@@ -134,7 +145,7 @@ let nbEnemy;
 let lifeCount=5;
 let timer = 50;
 let score = 0;
-
+let speed;
 
 
 
@@ -150,8 +161,8 @@ let lifedisplay = document.getElementById("life");
 let enemydisplay = document.getElementById("enemy");
 let timerdisplay = document.getElementById("timer");
 let scoredisplay = document.getElementById("score");
-lifedisplay.innerHTML = lifeCount + "  vies  restantes";
-enemydisplay.innerHTML = "Enemies : " + nbEnemy;
+
+
 scoredisplay.innerHTML = "Your score : <br>" + score;
 
 
@@ -165,52 +176,55 @@ scoredisplay.innerHTML = "Your score : <br>" + score;
 
 
 window.addEventListener("keydown", function (event) {
-	let touch = event.code;
-	let x = player.offsetLeft;
-	let y = player.offsetTop;
-	player.classList.remove("walkdown", "walkup", "walkleft", "walkright");
-	switch (touch) {
+	if(boolplayer){
+			let touch = event.code;
+			let x = player.offsetLeft;
+			let y = player.offsetTop;
+			player.classList.remove("walkdown", "walkup", "walkleft", "walkright");
+			switch (touch) {
 
-		case 'Space':
-			bombCreation(x, y);
-			bombNb.push();
-			break;
+				case 'Space':
+					bombCreation(x, y);
+					bombNb.push();
+					setTimeout(bombSong,1000);
+					break;
 
-		case 'ArrowLeft':
-			x -= sizeCell;
-			player.classList.add("walkleft");
-			break;
+				case 'ArrowLeft':
+					x -= sizeCell;
+					player.classList.add("walkleft");
+					break;
 
-		case 'ArrowDown':
-			y += sizeCell;
-			player.classList.add("walkdown");
-			break;
+				case 'ArrowDown':
+					y += sizeCell;
+					player.classList.add("walkdown");
+					break;
 
-		case 'ArrowRight':
-			x += sizeCell;
-			player.classList.add("walkright");
-			break;
+				case 'ArrowRight':
+					x += sizeCell;
+					player.classList.add("walkright");
+					break;
 
-		case 'ArrowUp':
-			y -= sizeCell;
-			player.classList.add("walkup");
-			break;
+				case 'ArrowUp':
+					y -= sizeCell;
+					player.classList.add("walkup");
+					break;
 
-		default:
+				default:
 
-	}
-	if (x >= 0 && x < sizeGameboard) {
-		player.style.left = String(x) + 'px';
-		walkSong();
-	}
-	else { wallSong(); }
+			}
+			if (x >= 0 && x < sizeGameboard) {
+				player.style.left = String(x) + 'px';
+				walkSong();
+			}
+			else { wallSong(); }
 
-	if (y >= 0 && y < sizeGameboard) {
-		player.style.top = String(y) + 'px';
+			if (y >= 0 && y < sizeGameboard) {
+				player.style.top = String(y) + 'px';
 
-	} else { wallSong(); }
+			} else { wallSong(); }
 
-	playerLife();
+			playerLife();
+		}
 });
 
 
@@ -406,7 +420,7 @@ function checkDestroy() {
 	for (let i = 0; i < bombD.length; i++) {
 		console.log(bombD.length);
 		if (date >= bombD[i] + 2 && date >= (bombD[i] - 8)) {
-			bombSong();
+			
 			let explodeXmin = bombX[i] - sizeCell - 1;
 			let explodeXmax = bombX[i] + 2 * sizeCell - 1;
 			let explodeYmin = bombY[i] - sizeCell - 1;
@@ -490,23 +504,24 @@ function playerLife() {
 
 // Joueur dead
 function playerDead() {
-	lifeCount--;
+	if(lifeset){
+			lifeCount--;
 
-	if (lifeCount == 0) {
-		homePageText = "GAME OVER!!!<br>Try again!";
-		overSong();
-		stopGame();
-		return homePageText;
-	}
-	else if (lifeCount == 1) {
-		lifedisplay.innerHTML = lifeCount + "  vie  restante";
-		lifeSong();
-	}
-	else {
-		lifedisplay.innerHTML = lifeCount + "  vies  restantes";
-		lifeSong();
-	}
-
+			if (lifeCount == 0) {
+				homePageText = "GAME OVER!!!<br>Try again!";
+				overSong();
+				stopGame();
+				return homePageText;
+			}
+			else if (lifeCount == 1) {
+				lifedisplay.innerHTML = lifeCount + "  vie  restante";
+				lifeSong();
+			}
+			else {
+				lifedisplay.innerHTML = lifeCount + "  vies  restantes";
+				lifeSong();
+			}
+	}else{lifedisplay.innerHTML = "You are invincible !";}
 }
 
 
@@ -576,8 +591,12 @@ function scoreEnemy() {
 }
 
 function scoreFinal() {
+	if(timerset){
 	score += timer *10*scoreEnemyDead;
 	homePageScore = "Your score : <br>" + score;
+	}else{
+	homePageScore = "Your score : <br>" + score;
+	}	
 	return homePageScore;
 }
 
@@ -585,7 +604,7 @@ function scoreFinal() {
 
 
 // Theme song---------------------------------------------------------------------------------------------------//
-/*
+
 let theme_song=document.createElement('audio');
  let first=true;
       window.addEventListener('mousedown',onmousedown);
@@ -599,7 +618,7 @@ let theme_song=document.createElement('audio');
        theme_song.play();
 	}
 
-*/
+
 
 let songOver = document.createElement('audio');
 let songWin = document.createElement('audio');
