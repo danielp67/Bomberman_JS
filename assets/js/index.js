@@ -44,7 +44,7 @@ function textGame() {
 
 
 
-let boolstop=true;
+let boolstop=false;
 let boolstart=true;
 let boolmenu=true;
 let boolplayer=false;
@@ -53,7 +53,7 @@ function stopGame() {
 	if(boolstop){
 	textGame();
 	clearInterval(interval);
-	setTimeout(setupInitialization, 3000);
+	setTimeout(setupInitialization, 4000);
 	boolstop=false;
 	}
 }
@@ -76,6 +76,7 @@ function startGame() {
 		boolstart=false;
 		boolmenu=false;
 		boolplayer=true;
+		boolstop=true;
 	}
 }
 

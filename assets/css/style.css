@@ -122,6 +122,19 @@ footer{
         to {right:10%;}
     }
 
+legend{
+    font-size: 5rem;
+}
+
+form .title{
+    font-size: 3rem;
+}
+
+form p{
+    margin-bottom: 40px;
+    padding-top: 50px;
+}
+
 fieldset{
     border:none;
     display: flex;
@@ -290,6 +303,8 @@ main{
     height: 700px;
     width: 700px;
     background-color: rgb(66, 211, 86);
+    background: url("../img/terrain.png") center;
+    background-size: 20px 20px ;
     border :20px rgba(58, 58, 58, 0.6);
     position: relative;
   
