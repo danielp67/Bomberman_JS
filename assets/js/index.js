@@ -211,7 +211,7 @@ window.addEventListener("keydown", function (event) {
 					break;
 
 				default:
-
+					player.classList.add("walkdown");
 			}
 			if (x >= 0 && x < sizeGameboard) {
 				player.style.left = String(x) + 'px';
@@ -364,7 +364,10 @@ function checkPosition() {
 				if (enemyX[i] == enemyX[n]) {
 
 					if (enemyY[i] == enemyY[n]) {
-						updatePosition(n);
+						do{updatePosition(n);
+							console.log("update");
+						}
+						while(enemyY[i] == enemyY[n] && enemyX[i] == enemyX[n]);
 						displayPosition(i);
 					}
 
