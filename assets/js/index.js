@@ -43,7 +43,6 @@ function textGame() {
 }
 
 
-
 let boolstop=false;
 let boolstart=true;
 let boolmenu=true;
@@ -70,6 +69,7 @@ function startGame() {
 		settingGame();
 		homePage.classList.remove("down");
 		homePage.classList.add("active");
+		mainMenu.classList.remove("active");
 		enemyCreation();
 		interval = setInterval(updateTime, speed);
 		startTimer();	
@@ -127,7 +127,7 @@ function settingGame(){
 
 	   if (document.getElementById('lifesetyes').checked) {
 		lifeset =true;
-		lifedisplay.innerHTML = lifeCount + "  vies  restantes";
+		lifedisplay.innerHTML = lifeCount + "  lifes remaining";
 	   }
 
 	   if (document.getElementById('lifesetno').checked) {
@@ -518,11 +518,11 @@ function playerDead() {
 				return homePageText;
 			}
 			else if (lifeCount == 1) {
-				lifedisplay.innerHTML = lifeCount + "  vie  restante";
+				lifedisplay.innerHTML = lifeCount + "  life remaining";
 				lifeSong();
 			}
 			else {
-				lifedisplay.innerHTML = lifeCount + "  vies  restantes";
+				lifedisplay.innerHTML = lifeCount + "  lifes remaining";
 				lifeSong();
 			}
 	}else{lifedisplay.innerHTML = "You are invincible !";}
@@ -604,10 +604,9 @@ function scoreFinal() {
 	return homePageScore;
 }
 
-
-
-
-// Theme song---------------------------------------------------------------------------------------------------//
+// --------------------------------------------AUDIO-----------------------------------------------------------//
+// ------------------------------------------------------------------------------------------------------------//
+// -------------------------------------------Theme song--------------------------------------------------------//
 
 let theme_song=document.createElement('audio');
  let first=true;
