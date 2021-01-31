@@ -1,14 +1,35 @@
-# tp03_bomberman
+# Bomberman in full Javascript
 
-With song
-With setting menu
-With sprites
+With song<br>
+With setting menu<br>
+With sprites<br>
+With several options<br>
+Supported on mobile too !<br>
+### Like a real arcade game
+### Enjoy it !
 
-Pas encore en orienté objet ;) mais bientôt
+Controls :
+- Space : bomb
+- → : right
+- ↑ : up
+- ← : left
+- ↓ : down
 
-Gestion des bombes et des explosions avec un système de date car setTimeout n'était pas assez précis dans mon cas. Et buger le système si on spam la barre espace...
-Bref à voir pour améliorer cette fonction.
+### 1. Start Menu
+![start_menu](assets/img/markdown/start.png)
 
-Voila ;)
+### 2. Options Menu
+![options_menu](assets/img/markdown/options.png)
 
-Nouvelle mise à jour simplifiée, avec code plus lisible pour bientôt !
+### 3. Play
+![inplay](assets/img/markdown/inplay.png)
+
+### 4. Medium Play
+![inplay](assets/img/markdown/medium.png)
+
+### 5. Hard Play
+![inplay](assets/img/markdown/hard.png)
+
+
+### 6. And if you win !!!
+![inplay](assets/img/markdown/win.png)

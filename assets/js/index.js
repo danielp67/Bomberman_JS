@@ -4,11 +4,16 @@
 let startBtn = document.getElementById("start");
 let quitBtn = document.getElementById("quit");
 let menuBtn = document.getElementById("menu");
-let settingBtn=document.getElementById("setting");
+let settingBtn = document.getElementById("setting");
 let interval;
 
+let boolstop = false;
+let boolstart = true;
+let boolmenu = true;
+let boolplayer = false;
 
-let homePageText="Really, You quit !!";
+
+let homePageText = "Really, You quit !!";
 let homePageScore;
 const mainMenu = document.querySelector("#nav_menu");
 let homePage = document.querySelector("#homepage");
@@ -19,10 +24,10 @@ quitBtn.addEventListener("click", stopGame);
 
 
 menuBtn.addEventListener("click", function () {
-	if(boolmenu){
-	mainMenu.classList.remove("right");
-	mainMenu.classList.add("active");
-}
+	if (boolmenu) {
+		mainMenu.classList.remove("right");
+		mainMenu.classList.add("active");
+	}
 });
 
 
@@ -35,127 +40,59 @@ settingBtn.addEventListener("click", function (event) {
 
 
 
-function textGame() {
-	scoreFinal();
-	homePage.innerHTML = homePageText +"<br>" + homePageScore;
-	homePage.classList.remove("active");
-	homePage.classList.add("inactive");
-}
-
-
-let boolstop=false;
-let boolstart=true;
-let boolmenu=true;
-let boolplayer=false;
 
 function stopGame() {
-	if(boolstop){
-	textGame();
-	clearInterval(interval);
-	setTimeout(setupInitialization, 4000);
-	boolstop=false;
+	if (boolstop) {
+		scoreFinal();
+		homePage.innerHTML = homePageText + "<br>" + homePageScore;
+		homePage.classList.remove("active");
+		homePage.classList.add("inactive");
+
+		clearInterval(interval);
+		boolstop = false;
+
+		setTimeout(function () {
+			boolstop = true;
+			boolstart = true;
+			location.reload(true);
+		}, 4000);
+
 	}
 }
 
-function setupInitialization() {
-	boolstop=true;
-	boolstart=true;
-	setTimeout(location.reload(true), 1000);
-}
-
 function startGame() {
-	
-	if(boolstart){
+
+	if (boolstart) {
 		settingGame();
 		homePage.classList.remove("down");
 		homePage.classList.add("active");
 		mainMenu.classList.remove("active");
 		enemyCreation();
 		interval = setInterval(updateTime, speed);
-		startTimer();	
-		boolstart=false;
-		boolmenu=false;
-		boolplayer=true;
-		boolstop=true;
+		startTimer();
+		boolstart = false;
+		boolmenu = false;
+		boolplayer = true;
+		boolstop = true;
 	}
 }
 
 // Récupération des settings
 
-
-
-let timerset;
-let lifeset;
-
-
-
-function settingGame(){
-
-	if (document.getElementById('easy').checked) {
-		sizeCell=50;
-		sizeGameboard=500;
-		nbEnemy=5;
-		speed=1000;
-	   }
-	 if (document.getElementById('medium').checked) {
-		sizeCell=50;
-		sizeGameboard=600;
-		nbEnemy=10;
-		speed=1000;
-	   }
-	if (document.getElementById('hard').checked) {
-		sizeCell=20;
-		sizeGameboard=700;
-		nbEnemy=20;
-		speed=500;
-		
-	   }
-	   player.classList.add("walkdown");
-	   player.style.height = sizeCell + 'px';
-	   player.style.width = sizeCell + 'px';
-	   gameboard.style.height = sizeGameboard + 'px';
-	   gameboard.style.width = sizeGameboard + 'px';
-	   enemydisplay.innerHTML = "Enemies : " + nbEnemy;
-
-	   if (document.getElementById('timersetyes').checked) {
-		timerset=true;
-	   }
-
-	   if (document.getElementById('timersetno').checked) {
-		timerset=false;
-	   }
-
-	   if (document.getElementById('lifesetyes').checked) {
-		lifeset =true;
-		lifedisplay.innerHTML = lifeCount + "  lifes remaining";
-	   }
-
-	   if (document.getElementById('lifesetno').checked) {
-		lifeset =false;
-		lifedisplay.innerHTML = "You are invincible !"
-	   }
-	   
-		  
-}
-
-
-// Taille du jeu
 let sizeGameboard;
 let sizeCell;
 let nbEnemy;
-let lifeCount=5;
+let lifeCount = 5;
 let timer = 50;
 let score = 0;
 let speed;
-
-
-
+let timerset;
+let lifeset;
 
 
 const player = document.querySelector(".player");
 const gameboard = document.querySelector(".gameboard");
 const audio = document.querySelector(".audio");
-
 
 
 let lifedisplay = document.getElementById("life");
@@ -164,11 +101,131 @@ let timerdisplay = document.getElementById("timer");
 let scoredisplay = document.getElementById("score");
 
 
-scoredisplay.innerHTML = "Your score : <br>" + score;
 
 
 
 
+function settingGame() {
+
+
+	if (document.getElementById('easy').checked) {
+		sizeCell = 50;
+		sizeGameboard = 500;
+		nbEnemy = 5;
+		speed = 1000;
+	}
+	if (document.getElementById('medium').checked) {
+		sizeCell = 50;
+		sizeGameboard = 600;
+		nbEnemy = 10;
+		speed = 1000;
+	}
+	if (document.getElementById('hard').checked) {
+		sizeCell = 20;
+		sizeGameboard = 700;
+		nbEnemy = 20;
+		speed = 500;
+
+	}
+	if (screen.width < 500) {
+		sizeCell = 40;
+		sizeGameboard = 320;
+		nbEnemy = 7;
+		speed = 1000;
+	}
+	player.classList.add("walkdown");
+	player.style.height = sizeCell + 'px';
+	player.style.width = sizeCell + 'px';
+	gameboard.style.height = sizeGameboard + 'px';
+	gameboard.style.width = sizeGameboard + 'px';
+	enemydisplay.innerHTML = "Enemies : " + nbEnemy;
+	scoredisplay.innerHTML = "Your score : <br>" + score;
+
+	if (document.getElementById('timersetyes').checked) {
+		timerset = true;
+	}
+
+	if (document.getElementById('timersetno').checked) {
+		timerset = false;
+	}
+
+	if (document.getElementById('lifesetyes').checked) {
+		lifeset = true;
+		lifedisplay.innerHTML = lifeCount + "  lifes remaining";
+	}
+
+	if (document.getElementById('lifesetno').checked) {
+		lifeset = false;
+		lifedisplay.innerHTML = "You are invincible !"
+	}
+
+
+}
+
+
+// Déplacement du joueur  FOR MOBILE VERSION
+
+
+
+gameboard.addEventListener("touchstart", function (event) {
+	touchstartX = event.changedTouches[0].screenX;
+	touchstartY = event.changedTouches[0].screenY;
+}, false);
+
+gameboard.addEventListener("touchend", function (event) {
+	touchendX = event.changedTouches[0].screenX;
+	touchendY = event.changedTouches[0].screenY;
+	handleGesure();
+}, false);
+
+function handleGesure(){
+	if (boolplayer) {
+		let x = player.offsetLeft;
+		let y = player.offsetTop;
+		player.classList.remove("walkdown", "walkup", "walkleft", "walkright");
+		console.log(touchstartX, touchstartY);
+		console.log(touchendX, touchendY);
+		if (touchendY == touchstartY) {
+			bombCreation(x, y);
+			bombNb.push();
+			setTimeout(bombSong, 1000);
+		}
+
+		if (touchendX < touchstartX-10) {
+			x -= sizeCell;
+			player.classList.add("walkleft");
+		}
+
+		if (touchendY > touchstartY+10) {
+			y += sizeCell;
+			player.classList.add("walkdown");
+		}
+
+		if (touchendX > touchstartX+10) {
+			x += sizeCell;
+			player.classList.add("walkright");
+		}
+
+		if (touchendY < touchstartY-10) {
+			y -= sizeCell;
+			player.classList.add("walkup");
+		}
+
+
+		if (x >= 0 && x < sizeGameboard) {
+			player.style.left = String(x) + 'px';
+			walkSong();
+		}
+		else { wallSong(); }
+
+		if (y >= 0 && y < sizeGameboard) {
+			player.style.top = String(y) + 'px';
+
+		} else { wallSong(); }
+
+		playerLife();
+	}
+}
 
 
 
@@ -177,57 +234,56 @@ scoredisplay.innerHTML = "Your score : <br>" + score;
 
 
 window.addEventListener("keydown", function (event) {
-	if(boolplayer){
-			let touch = event.code;
-			let x = player.offsetLeft;
-			let y = player.offsetTop;
-			player.classList.remove("walkdown", "walkup", "walkleft", "walkright");
-			switch (touch) {
+	if (boolplayer) {
+		let touch = event.code;
+		let x = player.offsetLeft;
+		let y = player.offsetTop;
+		player.classList.remove("walkdown", "walkup", "walkleft", "walkright");
+		switch (touch) {
 
-				case 'Space':
-					bombCreation(x, y);
-					bombNb.push();
-					setTimeout(bombSong,1000);
-					break;
+			case 'Space':
+				bombCreation(x, y);
+				bombNb.push();
+				setTimeout(bombSong, 1000);
+				break;
 
-				case 'ArrowLeft':
-					x -= sizeCell;
-					player.classList.add("walkleft");
-					break;
+			case 'ArrowLeft':
+				x -= sizeCell;
+				player.classList.add("walkleft");
+				break;
 
-				case 'ArrowDown':
-					y += sizeCell;
-					player.classList.add("walkdown");
-					break;
+			case 'ArrowDown':
+				y += sizeCell;
+				player.classList.add("walkdown");
+				break;
 
-				case 'ArrowRight':
-					x += sizeCell;
-					player.classList.add("walkright");
-					break;
+			case 'ArrowRight':
+				x += sizeCell;
+				player.classList.add("walkright");
+				break;
 
-				case 'ArrowUp':
-					y -= sizeCell;
-					player.classList.add("walkup");
-					break;
+			case 'ArrowUp':
+				y -= sizeCell;
+				player.classList.add("walkup");
+				break;
 
-				default:
-					player.classList.add("walkdown");
-			}
-			if (x >= 0 && x < sizeGameboard) {
-				player.style.left = String(x) + 'px';
-				walkSong();
-			}
-			else { wallSong(); }
-
-			if (y >= 0 && y < sizeGameboard) {
-				player.style.top = String(y) + 'px';
-
-			} else { wallSong(); }
-
-			playerLife();
+			default:
+				player.classList.add("walkdown");
 		}
-});
+		if (x >= 0 && x < sizeGameboard) {
+			player.style.left = String(x) + 'px';
+			walkSong();
+		}
+		else { wallSong(); }
 
+		if (y >= 0 && y < sizeGameboard) {
+			player.style.top = String(y) + 'px';
+
+		} else { wallSong(); }
+
+		playerLife();
+	}
+});
 
 
 
@@ -235,7 +291,6 @@ window.addEventListener("keydown", function (event) {
 // Création des bombes
 
 
-let bomb;
 let bombNb = [];
 let bombX = [];
 let bombY = [];
@@ -243,6 +298,7 @@ let bombD = [];
 
 
 function bombCreation(x, y) {
+
 	let i = bombNb.length;
 	bombNb[i] = document.createElement("div");
 	bombNb[i].classList.add("bomb");
@@ -259,6 +315,7 @@ function bombCreation(x, y) {
 
 
 }
+
 
 
 function bombExploded() {
@@ -284,26 +341,84 @@ function bombExploded() {
 
 // Création des ennemis
 
-let enemyX = [];
-let enemyY = [];
+let enemy = [];
 let enemyNb = [];
+let enemyPos=[];
+
+
+// POO version
+
 
 function enemyCreation() {
 	for (let i = 0; i < nbEnemy; i++) {
-		enemyX[i] = Math.floor(Math.random() * sizeGameboard / sizeCell) * sizeCell;
-		enemyY[i] = Math.floor(Math.random() * sizeGameboard / sizeCell) * sizeCell;
-		enemyNb[i] = document.createElement("div");
-		enemyNb[i].classList.add("enemy");
-		gameboard.appendChild(enemyNb[i]);
-		enemyNb[i].style.height = sizeCell + 'px';
-		enemyNb[i].style.width = sizeCell + 'px';
+		enemy[i] = new Enemy(i);
+		enemy[i].creation();
 	}
 
 	checkPosition();
 }
 
 
+class Enemy {
+	constructor(i){
+		this.i=i;
+	}
+	creation() {
+		let x;
+		let y;
 
+		x = Math.floor(Math.random() * sizeGameboard / sizeCell) * sizeCell;
+		y = Math.floor(Math.random() * sizeGameboard / sizeCell) * sizeCell;
+		enemyNb[this.i] = document.createElement("div");
+		enemyNb[this.i].classList.add("enemy");
+		gameboard.appendChild(enemyNb[this.i]);
+		enemyNb[this.i].style.height = sizeCell + 'px';
+		enemyNb[this.i].style.width = sizeCell + 'px';
+		enemyPos[this.i] =[x,y];
+
+		return enemyPos;
+	}
+
+	display(){
+		let x = enemyPos[this.i][0];
+		let y = enemyPos[this.i][1];
+
+		enemyNb[this.i].style.left = String(x) + 'px';
+		enemyNb[this.i].style.top = String(y) + 'px';
+
+	}
+
+	destroy() {
+		gameboard.removeChild(enemyNb[this.i]);
+		enemyNb.splice(this.i, 1);
+		enemyPos.splice(this.i, 1);
+		console.log(enemy);
+		console.log(enemyNb);
+		console.log(enemyPos);
+		enemyDeathSong();
+		Enemy.enemyDead();
+
+	}
+
+	static enemyDead() {
+		nbEnemy--;
+
+		if (nbEnemy == 0) {
+			homePageText = "YOU WIN!!!<br>Play again!";
+			scoreEnemy();
+			winSong();
+			stopGame();
+			return homePageText;
+		}
+		else {
+			enemydisplay.innerHTML = "Enemies : " + nbEnemy;
+			scoreEnemy();
+
+		}
+
+	}
+
+}
 
 
 // Déplacement des ennemis chaque intervalle de temps
@@ -311,8 +426,8 @@ function enemyCreation() {
 // Mise à jour des coordonnées
 
 function updatePosition(i) {
-	let x = enemyX[i];
-	let y = enemyY[i];
+	let x = enemyPos[i][0];
+	let y = enemyPos[i][1];
 	let position = Math.floor(Math.random() * 4);
 
 	switch (position) {
@@ -337,14 +452,14 @@ function updatePosition(i) {
 
 	}
 	if (x >= 0 && x < sizeGameboard) {
-		enemyX[i] = x;
+		enemyPos[i][0] = x;
 
 	} else {
 		updatePosition(i);
 	}
 
 	if (y >= 0 && y < sizeGameboard) {
-		enemyY[i] = y;
+		enemyPos[i][1] = y;
 
 	} else {
 		updatePosition(i);
@@ -355,38 +470,38 @@ function updatePosition(i) {
 // Vérification des positions entre ennemis
 function checkPosition() {
 
-	for (let i = 0; i < enemyNb.length; i++) {
+	for (let i = 0; i < enemyPos.length; i++) {
 
-		if (enemyNb.length > 1) {
+		if (enemyPos.length > 1) {
 
-			for (let n = i + 1; n < enemyNb.length; n++) {
+			for (let n = i + 1; n < enemyPos.length; n++) {
 
-				if (enemyX[i] == enemyX[n]) {
+				if (enemyPos[i][0] == enemyPos[n][1]) {
 
-					if (enemyY[i] == enemyY[n]) {
-						do{updatePosition(n);
-							console.log("update");
+					if (enemyPos[i][1] == enemyPos[n][1]) {
+						do {
+							updatePosition(n);
+
 						}
-						while(enemyY[i] == enemyY[n] && enemyX[i] == enemyX[n]);
-						displayPosition(i);
+						while (enemyPos[i][1] == enemyPos[n][1] && enemyPos[i][0] == enemyPos[n][1]);
+						enemy[i].display();
 					}
 
 					else {
-						displayPosition(i);
+						enemy[i].display();
 
 					}
 				}
 				else {
 
-					displayPosition(i);
-
+					enemy[i].display();
 				}
-				displayPosition(n);
+				enemy[n].display();
 			}
 
 		} else {
 
-			displayPosition(i);
+			enemy[i].display();
 
 		}
 
@@ -398,24 +513,6 @@ function checkPosition() {
 
 
 
-// Affichage des ennemis à l'écran
-
-function displayPosition(number) {
-	let x = enemyX[number];
-	let y = enemyY[number];
-
-	enemyNb[number].style.left = String(x) + 'px';
-
-	enemyNb[number].style.top = String(y) + 'px';
-
-}
-
-
-
-
-
-
-// Ennemis dead
 
 function checkDestroy() {
 
@@ -424,7 +521,7 @@ function checkDestroy() {
 	for (let i = 0; i < bombD.length; i++) {
 		console.log(bombD.length);
 		if (date >= bombD[i] + 2 && date >= (bombD[i] - 8)) {
-			
+
 			let explodeXmin = bombX[i] - sizeCell - 1;
 			let explodeXmax = bombX[i] + 2 * sizeCell - 1;
 			let explodeYmin = bombY[i] - sizeCell - 1;
@@ -432,11 +529,11 @@ function checkDestroy() {
 			let x = player.offsetLeft;
 			let y = player.offsetTop;
 
-			for (let n = 0; n < enemyNb.length; n++) {
+			for (let n = 0; n < enemyPos.length; n++) {
 
-				if (enemyX[n] >= explodeXmin && enemyX[n] < explodeXmax && enemyY[n] >= explodeYmin && enemyY[n] < explodeYmax) {
+				if (enemyPos[n][0] >= explodeXmin && enemyPos[n][0] < explodeXmax && enemyPos[n][1] >= explodeYmin && enemyPos[n][1] < explodeYmax) {
 
-					enemyDestroy(n);
+					enemy[n].destroy();
 				}
 			}
 			if (x >= explodeXmin && x < explodeXmax && y >= explodeYmin && y < explodeYmax) {
@@ -454,20 +551,22 @@ function checkDestroy() {
 
 
 
-function enemyDestroy(number) {
-	let i = number;
-	gameboard.removeChild(enemyNb[i]);
-	enemyNb.splice(i, 1);
-	enemyY.splice(i, 1);
-	enemyX.splice(i, 1);
-	console.log(enemyNb);
-	enemyDeathSong();
-	enemyDead();
+
+// Vérification des collisions avec le joueur
+
+function playerLife() {
+	let x = player.offsetLeft;
+	let y = player.offsetTop;
+
+	for (let i = 0; i < enemyNb.length; i++) {
+		if (x == enemyPos[i][0] && y == enemyPos[i][1]) {
+			playerDead();
+
+		}
+
+	}
 
 }
-
-
-
 
 
 
@@ -488,67 +587,32 @@ function updateTime() {
 
 
 
-// Vérification des collisions avec le joueur
-
-function playerLife() {
-	let x = player.offsetLeft;
-	let y = player.offsetTop;
-
-	for (let i = 0; i < enemyNb.length; i++) {
-		if (x == enemyX[i] && y == enemyY[i]) {
-			playerDead();
-
-		}
-
-	}
-
-}
-
+// --------------------------------Affichage et gestion de fin de jeu---------------------------------------//
+// ---------------------------------------------------------------------------------------------------------//
+// ---------------------------------------------------------------------------------------------------------//
 
 
 // Joueur dead
 function playerDead() {
-	if(lifeset){
-			lifeCount--;
+	if (lifeset) {
+		lifeCount--;
 
-			if (lifeCount == 0) {
-				homePageText = "GAME OVER!!!<br>Try again!";
-				overSong();
-				stopGame();
-				return homePageText;
-			}
-			else if (lifeCount == 1) {
-				lifedisplay.innerHTML = lifeCount + "  life remaining";
-				lifeSong();
-			}
-			else {
-				lifedisplay.innerHTML = lifeCount + "  lifes remaining";
-				lifeSong();
-			}
-	}else{lifedisplay.innerHTML = "You are invincible !";}
+		if (lifeCount == 0) {
+			homePageText = "GAME OVER!!!<br>Try again!";
+			overSong();
+			stopGame();
+			return homePageText;
+		}
+		else if (lifeCount == 1) {
+			lifedisplay.innerHTML = lifeCount + "  life remaining";
+			lifeSong();
+		}
+		else {
+			lifedisplay.innerHTML = lifeCount + "  lifes remaining";
+			lifeSong();
+		}
+	} else { lifedisplay.innerHTML = "You are invincible !"; }
 }
-
-
-// Ennemis restants
-
-function enemyDead() {
-	nbEnemy--;
-
-	if (nbEnemy == 0) {
-		homePageText = "YOU WIN!!!<br>Play again!";
-		scoreEnemy();
-		winSong();
-		stopGame();
-		return homePageText;
-	}
-	else {
-		enemydisplay.innerHTML = "Enemies : " + nbEnemy;
-		scoreEnemy();
-
-	}
-
-}
-
 
 
 
@@ -573,11 +637,12 @@ function bip() {
 	else {
 		timerdisplay.innerHTML = "Time : " + timer;
 	}
+	return timer;
 }
 function startTimer() {
-	if(timerset){
-	intervalId = setInterval(bip, 1000);
-}else{timerdisplay.innerHTML = "Time : infinity ";}
+	if (timerset) {
+		intervalId = setInterval(bip, 1000);
+	} else { timerdisplay.innerHTML = "Time : infinity "; }
 }
 
 
@@ -585,7 +650,7 @@ function startTimer() {
 
 
 // Score du joueur
-let scoreEnemyDead=0;
+let scoreEnemyDead = 0;
 
 function scoreEnemy() {
 	score += 100;
@@ -595,12 +660,12 @@ function scoreEnemy() {
 }
 
 function scoreFinal() {
-	if(timerset){
-	score += timer *10*scoreEnemyDead;
-	homePageScore = "Your score : <br>" + score;
-	}else{
-	homePageScore = "Your score : <br>" + score;
-	}	
+	if (timerset) {
+		score += timer * 10 * scoreEnemyDead;
+		homePageScore = "Your score : <br>" + score;
+	} else {
+		homePageScore = "Your score : <br>" + score;
+	}
 	return homePageScore;
 }
 
@@ -608,18 +673,19 @@ function scoreFinal() {
 // ------------------------------------------------------------------------------------------------------------//
 // -------------------------------------------Theme song--------------------------------------------------------//
 
-let theme_song=document.createElement('audio');
- let first=true;
-      window.addEventListener('mousedown',onmousedown);
- 
-    function onmousedown(){
-       if(!first) return;
-       first=false;
-	   theme_song.src="lib/theme.ogg";
-	   theme_song.setAttribute("loop","true");
-	   theme_song.volume=0.2;
-       theme_song.play();
-	}
+
+let theme_song = document.createElement('audio');
+let first = true;
+window.addEventListener('mousedown', onmousedown);
+
+function onmousedown() {
+	if (!first) return;
+	first = false;
+	theme_song.src = "lib/theme.ogg";
+	theme_song.setAttribute("loop", "true");
+	theme_song.volume = 0.2;
+	theme_song.play();
+}
 
 
 

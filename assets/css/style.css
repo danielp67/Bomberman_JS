@@ -9,7 +9,7 @@ html, body{
     height: 100%;
     background-color: darkgrey;
     font-family: 'Arcade';
-   
+
 }
 
 
@@ -43,7 +43,7 @@ header{
     height: 100px;
 }
 
- h1{
+h1{
     text-align: center;
     font-size: 6rem;
 }
@@ -88,39 +88,39 @@ footer{
     -ms-border-radius: 30px;
     -o-border-radius: 30px;
 }
-    #nav.right{
-        right:0%
-    }
-
-    #nav_menu.inactive{
-        animation:.5s slideRight ease-in forwards;
-        transition-delay:0;
-        -webkit-animation:.5s slideRight ease-in forwards;
+#nav.right{
+    right:0%
 }
-    #nav_menu.active {
-        animation:1s slideLeft ease-out forwards;
-        transition-delay:0;
-        -webkit-animation:1s slideLeft ease-out forwards;
-}
-    
-    /* Animations pour le menu slide */
-    @keyframes slideRight {
-        from {right:10%;}
-        to {right:-30%;}
-    }
-    @-webkit-keyframes slideRight {
-        from {right:10%;}
-        to {right:-30%;}
-    }
 
-    @keyframes slideLeft {
-        from {right:-30%;}
-        to {right:10%;}
-    }
-    @-webkit-keyframes slideLeft {
-        from {right:-30%;}
-        to {right:10%;}
-    }
+#nav_menu.inactive{
+    animation:.5s slideRight ease-in forwards;
+    transition-delay:0;
+    -webkit-animation:.5s slideRight ease-in forwards;
+}
+#nav_menu.active {
+    animation:1s slideLeft ease-out forwards;
+    transition-delay:0;
+    -webkit-animation:1s slideLeft ease-out forwards;
+}
+
+/* Animations pour le menu slide */
+@keyframes slideRight {
+    from {right:10%;}
+    to {right:-30%;}
+}
+@-webkit-keyframes slideRight {
+    from {right:10%;}
+    to {right:-30%;}
+}
+
+@keyframes slideLeft {
+    from {right:-30%;}
+    to {right:10%;}
+}
+@-webkit-keyframes slideLeft {
+    from {right:-30%;}
+    to {right:10%;}
+}
 
 legend{
     font-size: 5rem;
@@ -159,61 +159,61 @@ fieldset{
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-    position: relative;   
+    position: relative;
     margin: auto;
 }
 
-    #homepage {
-        position:fixed; 
-        z-index:5; 
-        top:-100%; 
-        left:0px; 
-        background-color: darkgrey;
-        width:100%;
-        padding-top: 8rem;
-        font-size: 8rem;
-        height: 100%;
-        list-style-type: none;
-        text-align:center; 
-        padding-inline-start: 0px;
-        display: flex;
-        flex-direction: column;
-        align-content: space-around;
-    }
-        #homepage.down{
-            top:0%;
-        }
+#homepage {
+    position:fixed;
+    z-index:5;
+    top:-100%;
+    left:0px;
+    background-color: darkgrey;
+    width:100%;
+    padding-top: 8rem;
+    font-size: 8rem;
+    height: 100%;
+    list-style-type: none;
+    text-align:center;
+    padding-inline-start: 0px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+#homepage.down{
+    top:0%;
+}
 
 
-        #homepage.active{
-            animation:.5s  slideUp ease-in forwards;
-            transition-delay:0;
-            -webkit-animation:.5s  slideUp ease-in forwards;
+#homepage.active{
+    animation:.5s  slideUp ease-in forwards;
+    transition-delay:0;
+    -webkit-animation:.5s  slideUp ease-in forwards;
 }
-        #homepage.inactive {
-            animation:1s slideDown ease-out forwards;
-            transition-delay:0;
-            -webkit-animation:1s slideDown ease-out forwards;
+#homepage.inactive {
+    animation:1s slideDown ease-out forwards;
+    transition-delay:0;
+    -webkit-animation:1s slideDown ease-out forwards;
 }
-        
-        /* Animations pour le menu slide */
-        @keyframes slideUp {
-            from {top:0%;}
-            to {top:-100%;}
-        }
-        @-webkit-keyframes slideUp {
-            from {top:0%;}
-            to {top:-100%;}
-        }
-    
-        @keyframes slideDown {
-            from {top:-100%;}
-            to {top:0%;}
-        }
-        @-webkit-keyframes slideDown {
-            from {top:-100%;}
-            to {top:0%;}
-        }
+
+/* Animations pour le menu slide */
+@keyframes slideUp {
+    from {top:0%;}
+    to {top:-100%;}
+}
+@-webkit-keyframes slideUp {
+    from {top:0%;}
+    to {top:-100%;}
+}
+
+@keyframes slideDown {
+    from {top:-100%;}
+    to {top:0%;}
+}
+@-webkit-keyframes slideDown {
+    from {top:-100%;}
+    to {top:0%;}
+}
 
 
 
@@ -230,11 +230,11 @@ fieldset{
 footer button{
     width:250px;
     height:80px;
-    
+
     font-size: 2.5rem;
     font-family: 'Arcade';
     color:white;
-    
+
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -256,8 +256,8 @@ footer button.inactive{
 main{
     display: flex;
     justify-content: center;
-   
-    
+
+
 }
 
 #life{
@@ -301,7 +301,7 @@ main{
     width: 150px;
     font-size:1.8rem;
     font-weight: 10;
-   
+
 }
 
 
@@ -315,7 +315,7 @@ main{
     border :20px rgba(58, 58, 58, 0.6);
     position: relative;
     outline: ridge 20px rgb(148, 148, 148);
-  
+
 }
 
 
@@ -335,85 +335,85 @@ main{
 }
 
 .walkdown{
-    
+
     animation-name: walkdown;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
 }
- 
+
 @keyframes walkdown {
     0%   { background: url("../img/player1.png") no-repeat center ;}
     50%  { background: url("../img/player2.png") no-repeat center ;}
     100%  { background: url("../img/player3.png") no-repeat center ;}
-    
+
 }
 
 
 .walkright{
-    
+
     animation-name: walkright;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
 }
- 
+
 @keyframes walkright {
     0%   { background: url("../img/player4.png") no-repeat center ;}
     50%  { background: url("../img/player5.png") no-repeat center ;}
     100%  { background: url("../img/player6.png") no-repeat center ;}
-    
+
 }
 
 
 
 .walkup{
-    
+
     animation-name: walkup;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
 }
- 
+
 @keyframes walkup {
     0%   { background: url("../img/player7.png") no-repeat center ;}
     50%  { background: url("../img/player8.png") no-repeat center ;}
     100%  { background: url("../img/player9.png") no-repeat center ;}
-    
+
 }
 
 
 .walkleft{
-    
+
     animation-name: walkleft;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
 }
- 
+
 @keyframes walkleft {
     0%   { background: url("../img/player10.png") no-repeat center ;}
     50%  { background: url("../img/player11.png") no-repeat center ;}
     100%  { background: url("../img/player12.png") no-repeat center ;}
-    
+
 }
 
 
 .enemy{
     height:50px;
     width: 50px;
-    
+
     position:absolute;
     top:0px;
     left:0px;
     animation-name: enemyanimation;
     animation-duration: 1.5s;
     animation-timing-function: linear;
-    
+
     animation-iteration-count: infinite;
     animation-direction: normal;
 }
@@ -425,7 +425,7 @@ main{
     50%   { background: url("../img/enemy3.png") no-repeat center ;background-size:  contain ;}
     75%  { background: url("../img/enemy4.png") no-repeat center ;background-size:  contain ;}
     100%  { background: url("../img/enemy5.png") no-repeat center ;background-size:  contain ;}
-    
+
 }
 
 
@@ -439,12 +439,12 @@ main{
     animation-name: exploded;
     animation-duration: 2s;
     animation-timing-function: linear;
-    
+
     animation-iteration-count: initial;
     animation-direction: normal;
-    
+
 }
-  
+
 
 
 @keyframes exploded {
@@ -468,6 +468,129 @@ main{
     94%  {  background: url("../img/explosion16.png") no-repeat; background-size:  cover ;}
     95% { background-color:rgba(0, 0, 0, 0.5); transform:scale(2) ; -webkit-transform:scale(2) ; -moz-transform:scale(2) ; -ms-transform:scale(2) ; -o-transform:scale(2) ; }
     100% { background-color:rgba(0, 0, 0, 0.5); transform:scale(2) ; -webkit-transform:scale(2) ; -moz-transform:scale(2) ; -ms-transform:scale(2) ; -o-transform:scale(2) ; }
- 
+
 }
 
+
+
+/****MOBILE VERSION***/
+
+@media all and (max-width: 500px){
+
+    html, body{
+        font-size: 45%;
+        height: 100%;
+    }
+
+    #menu{
+        display: none;
+    }
+
+
+    #life{
+        position:fixed;
+        left:15%;
+        top:50px;
+        width: 50px;
+        font-size:1.8rem;
+        font-weight: 10;
+    }
+    #enemy{
+        position:fixed;
+        left:15%;
+        top:80px;
+        width: 50px;
+        font-size:1.8rem;
+        font-weight: 10;
+    }
+
+
+    #score{
+        position:fixed;
+        right:5%;
+        top:40px;
+        width: 120px;
+        height: 70px;
+        font-size:2.5rem;
+        font-weight: 10;
+        color : red;
+        background-color: black;
+        border : 10px ridge darkgray;
+        font-family: "clock";
+        text-align: right;
+    }
+
+
+    #timer{
+        position:fixed;
+        right:45%;
+        top:80px;
+        width: 50px;
+        font-size:1.8rem;
+        font-weight: 10;
+
+    }
+
+    .gameboard{
+
+        height: 300px;
+        width: 300px;
+        background-color: rgb(66, 211, 86);
+        background: url("../img/terrain.png") center;
+        background-size: 20px 20px ;
+        border :20px rgba(58, 58, 58, 0.6);
+        position: fixed;
+        margin:auto;
+        top:25%;
+        outline: ridge 20px rgb(148, 148, 148);
+
+    }
+
+
+    footer button{
+        width:250px;
+        height:60px;
+        margin-top:20px;
+
+    }
+
+
+
+
+
+
+    .bomb {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top:0px;
+        left:0px;
+        animation-name: exploded;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        border-radius: 50%;
+        animation-iteration-count: initial;
+        animation-direction: normal;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+
+
+
+    @keyframes exploded {
+        0%   {  background-color: red; background-size:  contain ;}
+        40%   {  background-color: red; background-size:  contain ;}
+        50%  { background-color: red; background-size:  cover ; transform:scale(2) ; -webkit-transform:scale(2) ; -moz-transform:scale(2) ; -ms-transform:scale(2) ; -o-transform:scale(2) ; }
+        68%  { background-color: red; background-size:  cover ;}
+        83%   { background-color: red; background-size:  cover ; transform:scale(1) ; -webkit-transform:scale(1) ; -moz-transform:scale(1) ; -ms-transform:scale(1) ; -o-transform:scale(1) ; }
+        90%  { background-color: red; background-size:  cover ;}
+        95% { background-color:rgba(0, 0, 0, 0.5); transform:scale(2) ; -webkit-transform:scale(2) ; -moz-transform:scale(2) ; -ms-transform:scale(2) ; -o-transform:scale(2) ; }
+        100% { background-color:rgba(0, 0, 0, 0.5); transform:scale(2) ; -webkit-transform:scale(2) ; -moz-transform:scale(2) ; -ms-transform:scale(2) ; -o-transform:scale(2) ; }
+
+    }
+
+
+
+}
